@@ -2,16 +2,13 @@ import telebot
 import configparser
 import subprocess
 import threading
-import os
 
-# Load config.ini
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-# Ambil token & admin ID
-try:
-    TOKEN = config['telegram']['bot_token']
-    ADMIN_ID = int(config['telegram']['admin_id'])
+TOKEN = config['telegram']['bot_token']
+ADMIN_ID = int(config['telegram']['admin_id'])
+
 except KeyError as e:
     print(f"Error: Pastikan 'bot_token' dan 'admin_id' ada di config.ini -> {e}")
     exit(1)
