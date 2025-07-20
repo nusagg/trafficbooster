@@ -1,10 +1,15 @@
 import telebot
+import configparser
 import subprocess
 import threading
 
-# Langsung isi token bot dan admin ID Telegram
-TOKEN = "7511600391:AAF1xff06DqkYuVA5B2FiEi96rlmYzimslc"
-ADMIN_ID = 7958271584
+# Baca dari config.ini
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Ambil token dan admin ID dari config
+TOKEN = config['telegram']['bot_token']
+ADMIN_ID = int(config['telegram']['admin_id'])
 
 bot = telebot.TeleBot(TOKEN)
 process = None
@@ -17,7 +22,6 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['run'])
 def handle_run(message):
-    global process
     if message.from_user.id != ADMIN_ID:
         return
     msg = bot.reply_to(message, "Masukkan target|threads|delay (contoh: https://site.com|10|2):")
@@ -41,7 +45,6 @@ def run_booster(message):
 
 @bot.message_handler(commands=['status'])
 def handle_status(message):
-    global process
     if message.from_user.id != ADMIN_ID:
         return
     status = "Aktif" if process and process.poll() is None else "Tidak aktif"
