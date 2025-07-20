@@ -1,14 +1,10 @@
 import telebot
-import configparser
 import subprocess
 import threading
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-# Ambil token dan admin ID dari config
-TOKEN = config['telegram']['bot_token']
-ADMIN_ID = int(config['telegram']['admin_id'])
+# Langsung isi token bot dan admin ID Telegram
+TOKEN = "7511600391:AAF1xff06DqkYuVA5B2FiEi96rlmYzimslc"
+ADMIN_ID = 7958271584
 
 bot = telebot.TeleBot(TOKEN)
 process = None
